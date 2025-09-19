@@ -1,1 +1,4 @@
--r prod.txt
+asgiref==3.9.1
+Django==5.0
+python-decouple==3.8
+sqlparse==0.5.3
