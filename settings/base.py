@@ -24,7 +24,10 @@ DJANGO_AND_THIRD_PARTY_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = ["apps.catalogs.apps.CatalogsConfig"]
+PROJECT_APPS = [
+    "apps.catalogs.apps.CatalogsConfig",
+    "apps.commerces.apps.CommercesConfig",
+]
 INSTALLED_APPS = DJANGO_AND_THIRD_PARTY_APPS + PROJECT_APPS
 
 # ----------------------------------------------
