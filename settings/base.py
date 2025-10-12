@@ -24,7 +24,7 @@ DJANGO_AND_THIRD_PARTY_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-PROJECT_APPS = ["apps.abstracts.apps.AbstractsConfig"]
+PROJECT_APPS = ["apps.abstracts.apps.AbstractsConfig", "apps.db.apps.DbConfig"]
 INSTALLED_APPS = DJANGO_AND_THIRD_PARTY_APPS + PROJECT_APPS
 
 # ----------------------------------------------
