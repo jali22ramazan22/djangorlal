@@ -67,10 +67,10 @@ class PaginatedMixin:
 class JSONSerializerInstanceMixin:
 
     def to_json(self) -> dict:
-        _dict_obj = model_to_dict(self)
+        dict_obj = model_to_dict(self)
 
-        for key, value in _dict_obj.items():
+        for key, value in dict_obj.items():
             if isinstance(value, (date, datetime)):
-                _dict_obj[key] = value.isoformat()
+                dict_obj[key] = value.isoformat()
 
-        return _dict_obj
+        return dict_obj

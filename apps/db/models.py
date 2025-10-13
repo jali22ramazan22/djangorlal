@@ -55,3 +55,32 @@ class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
         if self.deadline and not self.completed_at:
             return self.deadline < datetime.now().date()
         return False
+
+    def to_json(self):
+        data = super().to_json()
+        data["project"] = {
+            "id": self.project.id,
+            "name": self.project.project_name,
+            "company": {
+                "id": self.project.company_id.id,
+                "name": self.project.company_id.company_name,
+            },
+        }
+
+        if self.assignee:
+            data["assignee"] = {
+                "id": self.assignee.id,
+                "username": self.assignee.username,
+                "role": self.assignee.role,
+                "company": {
+                    "id": self.assignee.company_id.id,
+                    "name": self.assignee.company_id.company_name,
+                },
+            }
+        else:
+            data["assignee"] = None
+
+        data["status"] = self.status
+        data["overdue"] = self.overdue
+
+        return data
