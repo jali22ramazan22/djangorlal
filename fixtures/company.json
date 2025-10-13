@@ -1,0 +1,142 @@
+[
+  {
+    "model": "db.Company",
+    "pk": 1,
+    "fields": {
+      "company_name": "Kaspi.kz"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 2,
+    "fields": {
+      "company_name": "Halyk Bank"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 3,
+    "fields": {
+      "company_name": "Air Astana"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 4,
+    "fields": {
+      "company_name": "KEGOC"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 5,
+    "fields": {
+      "company_name": "KazMunayGas"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 6,
+    "fields": {
+      "company_name": "Samruk-Kazyna"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 7,
+    "fields": {
+      "company_name": "Kazakhtelecom"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 8,
+    "fields": {
+      "company_name": "Freedom Holding Corp"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 9,
+    "fields": {
+      "company_name": "Beeline Kazakhstan"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 10,
+    "fields": {
+      "company_name": "Kcell"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 11,
+    "fields": {
+      "company_name": "Kaspi Tech"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 12,
+    "fields": {
+      "company_name": "Qazaq Air"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 13,
+    "fields": {
+      "company_name": "Astana Hub"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 14,
+    "fields": {
+      "company_name": "BI Group"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 15,
+    "fields": {
+      "company_name": "Chocofamily"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 16,
+    "fields": {
+      "company_name": "Tech Garden"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 17,
+    "fields": {
+      "company_name": "Tengizchevroil"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 18,
+    "fields": {
+      "company_name": "Kazpost"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 19,
+    "fields": {
+      "company_name": "QazTrade"
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 20,
+    "fields": {
+      "company_name": "Almaty IT Valley"
+    }
+  }
+]
