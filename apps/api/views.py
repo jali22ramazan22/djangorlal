@@ -178,3 +178,93 @@ class JiraUserSoftDeleteView(BaseAPIView):
         else:
             return self.error_response("action должен быть 'delete' или 'restore'")
         return self.json_response(user.to_json())
+
+
+class CompanyListView(BaseAPIView):
+    def get(self, request: HttpRequest) -> JsonResponse:
+        companies = Company.objects.filter(deleted_at__isnull=True)
+        data = [c.to_json() for c in companies]
+        return self.json_response(data)
+
+
+class CompanyDetailView(BaseAPIView):
+    def get(self, request: HttpRequest, pk: int) -> JsonResponse:
+        company = get_object_or_404(Company, id=pk)
+        projects = company.project_set.filter(deleted_at__isnull=True)
+        data = {
+            "company": company.company_name,
+            "projects": [{"id": p.id, "name": p.project_name} for p in projects],
+        }
+        return self.json_response(data)
+
+
+class ProjectDetailView(BaseAPIView):
+    def get(self, request: HttpRequest, pk: int) -> JsonResponse:
+        project = get_object_or_404(Project, id=pk)
+        tasks = project.task_set.filter(deleted_at__isnull=True)
+        data = {
+            "id": project.id,
+            "name": project.project_name,
+            "company": project.company_id.company_name,
+            "tasks": [t.to_json() for t in tasks],
+        }
+        return self.json_response(data)
+
+
+class ProjectListView(BaseAPIView):
+    def get(self, request: HttpRequest) -> JsonResponse:
+        projects = Project.objects.filter(deleted_at__isnull=True)
+        data = [p.to_json() for p in projects]
+        return self.json_response(data)
+
+
+class DashboardView(BaseAPIView):
+    def get(self, request: HttpRequest, user_id: int) -> JsonResponse:
+
+        user = get_object_or_404(JiraUser, id=user_id)
+
+        if user.role.lower() in ["teamlead", "team_lead", "lead", "тимлид"]:
+            company = user.company_id
+            projects = Project.objects.filter(
+                company_id=company, deleted_at__isnull=True
+            )
+            tasks = Task.objects.filter(project__in=projects, deleted_at__isnull=True)
+
+            data = {
+                "company": {
+                    "id": company.id,
+                    "name": company.company_name,
+                },
+                "projects_count": projects.count(),
+                "tasks_count": tasks.count(),
+                "open_tasks": tasks.filter(completed_at__isnull=True).count(),
+                "closed_tasks": tasks.filter(completed_at__isnull=False).count(),
+                "by_project": list(
+                    tasks.values("project__project_name").annotate(count=Count("id"))
+                ),
+                "by_category": list(
+                    tasks.values("category").annotate(count=Count("id"))
+                ),
+                "projects": [
+                    {
+                        "id": p.id,
+                        "name": p.project_name,
+                        "tasks": Task.objects.filter(project=p).count(),
+                    }
+                    for p in projects
+                ],
+            }
+
+        else:
+            data = {
+                "company": None,
+                "projects_count": None,
+                "tasks_count": None,
+                "open_tasks": None,
+                "closed_tasks": None,
+                "by_project": None,
+                "by_category": None,
+                "projects": None,
+            }
+
+        return self.json_response(data)
