@@ -3,6 +3,8 @@ from django.db import models
 from apps.abstracts.models import AbstractSoftDeletableModel
 from django.contrib.auth.models import User
 
+from datetime import datetime
+
 
 class Company(AbstractSoftDeletableModel):
     company_name = models.CharField(max_length=100)
@@ -31,10 +33,22 @@ class Task(AbstractSoftDeletableModel):
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    assignee = models.ForeignKey(JiraUser, on_delete=models.CASCADE)
-    deadline = models.DateField()
-    completed_at = models.DateField()
-    created_at = models.DateField()
+    assignee = models.ForeignKey(
+        JiraUser, on_delete=models.CASCADE, blank=True, null=True
+    )
+    deadline = models.DateField(blank=True, null=True)
+    completed_at = models.DateField(blank=True, null=True)
+    created_at = models.DateField(default=datetime.now())
 
     def __str__(self):
         return f"Task {self.title}-{self.category}-{self.project}-{self.deadline}"
+
+    @property
+    def status(self):
+        if not self.completed_at:
+            return "open"
+        return "closed"
+
+    @property
+    def overdue(self):
+        return self.deadline > datetime.now().date()
