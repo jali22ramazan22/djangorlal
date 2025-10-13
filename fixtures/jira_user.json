@@ -1,0 +1,202 @@
+[
+  {
+    "model": "db.JiraUser",
+    "pk": 1,
+    "fields": {
+      "username": "aidos.kaspi",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 1,
+      "role": "Backend Developer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 2,
+    "fields": {
+      "username": "dana.halyk",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 2,
+      "role": "Project Manager"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 3,
+    "fields": {
+      "username": "amir.airastana",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 3,
+      "role": "QA Engineer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 4,
+    "fields": {
+      "username": "asylbek.kegoc",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 4,
+      "role": "System Administrator"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 5,
+    "fields": {
+      "username": "gulnara.kmg",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 5,
+      "role": "Data Analyst"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 6,
+    "fields": {
+      "username": "nurlan.samruk",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 6,
+      "role": "Finance Manager"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 7,
+    "fields": {
+      "username": "aliya.kztelecom",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 7,
+      "role": "Network Engineer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 8,
+    "fields": {
+      "username": "ramazan.freedom",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 8,
+      "role": "Investment Analyst"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 9,
+    "fields": {
+      "username": "aigul.beeline",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 9,
+      "role": "Frontend Developer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 10,
+    "fields": {
+      "username": "dias.kcell",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 10,
+      "role": "UX/UI Designer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 11,
+    "fields": {
+      "username": "azamat.kaspitech",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 11,
+      "role": "Mobile Developer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 12,
+    "fields": {
+      "username": "saule.qazaqair",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 12,
+      "role": "Product Owner"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 13,
+    "fields": {
+      "username": "arman.astanahub",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 13,
+      "role": "Startup Mentor"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 14,
+    "fields": {
+      "username": "nazym.bigroup",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 14,
+      "role": "Architect Engineer"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 15,
+    "fields": {
+      "username": "yerlan.chocofamily",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 15,
+      "role": "Marketing Specialist"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 16,
+    "fields": {
+      "username": "malika.techgarden",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 16,
+      "role": "Data Scientist"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 17,
+    "fields": {
+      "username": "bolat.tco",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 17,
+      "role": "Operations Manager"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 18,
+    "fields": {
+      "username": "aikerim.kazpost",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 18,
+      "role": "HR Manager"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 19,
+    "fields": {
+      "username": "adil.qaztrade",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 19,
+      "role": "Export Specialist"
+    }
+  },
+  {
+    "model": "db.JiraUser",
+    "pk": 20,
+    "fields": {
+      "username": "nuray.almatyit",
+      "password": "pbkdf2_sha256$...",
+      "company_id": 20,
+      "role": "Software Tester"
+    }
+  }
+]
