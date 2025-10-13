@@ -1,7 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from apps.abstracts.models import AbstractSoftDeletableModel
-from django.contrib.auth.models import User
+from apps.abstracts.mixins import JSONSerializerInstanceMixin
 
 from datetime import datetime
 
@@ -29,7 +30,7 @@ class Project(AbstractSoftDeletableModel):
         return f"Project {self.project_name}"
 
 
-class Task(AbstractSoftDeletableModel):
+class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=100)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -51,4 +52,6 @@ class Task(AbstractSoftDeletableModel):
 
     @property
     def overdue(self):
-        return self.deadline > datetime.now().date()
+        if self.deadline and not self.completed_at:
+            return self.deadline < datetime.now().date()
+        return False
