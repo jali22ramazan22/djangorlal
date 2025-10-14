@@ -37,13 +37,25 @@ class JiraUser(User, JSONSerializerInstanceMixin):
         return data
 
 
-class Project(AbstractSoftDeletableModel):
+class Project(JSONSerializerInstanceMixin, AbstractSoftDeletableModel):
     project_name = models.CharField(max_length=100)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Project {self.project_name}"
 
+    def to_json(self):
+        data = super().to_json()
+
+        data.pop("company_id", None)
+
+        data["company"] = {
+            "company": {
+                "id": self.company_id.id,
+                "name": self.company_id.company_name,
+            },
+        }
+        return data
 
 class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
     title = models.CharField(max_length=100)
@@ -139,3 +151,27 @@ class TaskFilter:
         if status == "closed":
             return [t for t in task_list if t.status == "closed"]
         return task_list
+
+class Comment(JSONSerializerInstanceMixin, AbstractSoftDeletableModel):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name="comments")
+    author = models.ForeignKey(JiraUser, on_delete=models.CASCADE)
+    text = models.TextField()
+    created_at = models.DateField(default=datetime.now())
+
+    def __str__(self):
+        return f"Comment {self.author.username} on {self.task.title}"
+
+    def to_json(self):
+        data = super().to_json()
+        data["task"] = {
+            "id": self.task.id,
+            "title": self.task.title,
+        }
+        data["author"] = {
+            "id": self.author.id,
+            "username": self.author.username,
+            "role": self.author.role,
+        }
+        data["created_at"] = self.created_at.isoformat()
+        return data
+    # я все уже утро
