@@ -37,12 +37,25 @@ class JiraUser(User, JSONSerializerInstanceMixin):
         return data
 
 
-class Project(AbstractSoftDeletableModel):
+class Project(JSONSerializerInstanceMixin, AbstractSoftDeletableModel):
     project_name = models.CharField(max_length=100)
     company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Project {self.project_name}"
+
+    def to_json(self):
+        data = super().to_json()
+
+        data.pop("company_id", None)
+
+        data["company"] = {
+            "company": {
+                "id": self.company_id.id,
+                "name": self.company_id.company_name,
+            },
+        }
+        return data
 
 
 class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
@@ -104,13 +117,13 @@ class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
 class TaskFilter:
     @staticmethod
     def apply(
-        queryset,
-        *,
-        project_id=None,
-        assignee_id=None,
-        category=None,
-        overdue=None,
-        status=None,
+            queryset,
+            *,
+            project_id=None,
+            assignee_id=None,
+            category=None,
+            overdue=None,
+            status=None,
     ):
         if project_id:
             queryset = queryset.filter(project_id=project_id)
@@ -123,6 +136,12 @@ class TaskFilter:
         tasks = TaskFilter.filter_by_overdue(tasks, overdue)
         tasks = TaskFilter.filter_by_status(tasks, status)
         return tasks
+
+    @staticmethod
+    def filter_by_priority(task_list, priority):
+        if not priority:
+            return task_list
+        return [t for t in task_list if getattr(t, "priority", None) == priority]
 
     @staticmethod
     def filter_by_overdue(task_list, overdue):
@@ -139,3 +158,14 @@ class TaskFilter:
         if status == "closed":
             return [t for t in task_list if t.status == "closed"]
         return task_list
+
+    @staticmethod
+    def sort(task_list, sort_by=None):
+        if not sort_by:
+            return task_list
+        reverse = sort_by.startswith("-")
+        key = sort_by.lstrip("-")
+        try:
+            return sorted(task_list, key=lambda t: getattr(t, key), reverse=reverse)
+        except Exception:
+            return task_list

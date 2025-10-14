@@ -26,3 +26,8 @@ class AbstractSoftDeletableModel(models.Model):
     def restore_deleted(self) -> None:
         self.deleted_at = None
         self.save(update_fields=["deleted_at"])
+
+
+
+
+    
