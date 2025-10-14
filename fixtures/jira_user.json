@@ -1,0 +1,141 @@
+[
+  {"model": "auth.user", "pk": 1, "fields": {
+    "username": "aidos.kaspi", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 1, "fields": {"user_ptr": 1, "company_id": 1, "role": "Backend Developer"}},
+
+  {"model": "auth.user", "pk": 2, "fields": {
+    "username": "dana.halyk", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 2, "fields": {"user_ptr": 2, "company_id": 2, "role": "Project Manager"}},
+
+  {"model": "auth.user", "pk": 3, "fields": {
+    "username": "amir.airastana", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 3, "fields": {"user_ptr": 3, "company_id": 3, "role": "QA Engineer"}},
+
+  {"model": "auth.user", "pk": 4, "fields": {
+    "username": "asylbek.kegoc", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 4, "fields": {"user_ptr": 4, "company_id": 4, "role": "System Administrator"}},
+
+  {"model": "auth.user", "pk": 5, "fields": {
+    "username": "gulnara.kmg", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 5, "fields": {"user_ptr": 5, "company_id": 5, "role": "Data Analyst"}},
+
+  {"model": "auth.user", "pk": 6, "fields": {
+    "username": "nurlan.samruk", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 6, "fields": {"user_ptr": 6, "company_id": 6, "role": "Finance Manager"}},
+
+  {"model": "auth.user", "pk": 7, "fields": {
+    "username": "aliya.kztelecom", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 7, "fields": {"user_ptr": 7, "company_id": 7, "role": "Network Engineer"}},
+
+  {"model": "auth.user", "pk": 8, "fields": {
+    "username": "ramazan.freedom", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 8, "fields": {"user_ptr": 8, "company_id": 8, "role": "Investment Analyst"}},
+
+  {"model": "auth.user", "pk": 9, "fields": {
+    "username": "aigul.beeline", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 9, "fields": {"user_ptr": 9, "company_id": 9, "role": "Frontend Developer"}},
+
+  {"model": "auth.user", "pk": 10, "fields": {
+    "username": "dias.kcell", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 10, "fields": {"user_ptr": 10, "company_id": 10, "role": "UX/UI Designer"}},
+
+  {"model": "auth.user", "pk": 11, "fields": {
+    "username": "azamat.kaspitech", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 11, "fields": {"user_ptr": 11, "company_id": 11, "role": "Mobile Developer"}},
+
+  {"model": "auth.user", "pk": 12, "fields": {
+    "username": "saule.qazaqair", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 12, "fields": {"user_ptr": 12, "company_id": 12, "role": "Product Owner"}},
+
+  {"model": "auth.user", "pk": 13, "fields": {
+    "username": "arman.astanahub", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 13, "fields": {"user_ptr": 13, "company_id": 13, "role": "Startup Mentor"}},
+
+  {"model": "auth.user", "pk": 14, "fields": {
+    "username": "nazym.bigroup", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 14, "fields": {"user_ptr": 14, "company_id": 14, "role": "Architect Engineer"}},
+
+  {"model": "auth.user", "pk": 15, "fields": {
+    "username": "yerlan.chocofamily", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 15, "fields": {"user_ptr": 15, "company_id": 15, "role": "Marketing Specialist"}},
+
+  {"model": "auth.user", "pk": 16, "fields": {
+    "username": "malika.techgarden", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 16, "fields": {"user_ptr": 16, "company_id": 16, "role": "Data Scientist"}},
+
+  {"model": "auth.user", "pk": 17, "fields": {
+    "username": "bolat.tco", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 17, "fields": {"user_ptr": 17, "company_id": 17, "role": "Operations Manager"}},
+
+  {"model": "auth.user", "pk": 18, "fields": {
+    "username": "aikerim.kazpost", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 18, "fields": {"user_ptr": 18, "company_id": 18, "role": "HR Manager"}},
+
+  {"model": "auth.user", "pk": 19, "fields": {
+    "username": "adil.qaztrade", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 19, "fields": {"user_ptr": 19, "company_id": 19, "role": "Export Specialist"}},
+
+  {"model": "auth.user", "pk": 20, "fields": {
+    "username": "nuray.almatyit", "password": "pbkdf2_sha256$...", "is_superuser": false,
+    "is_staff": false, "is_active": true, "first_name": "", "last_name": "",
+    "email": "", "last_login": null, "date_joined": "2025-10-14T00:00:00Z"
+  }},
+  {"model": "db.jirauser", "pk": 20, "fields": {"user_ptr": 20, "company_id": 20, "role": "Software Tester"}}
+]

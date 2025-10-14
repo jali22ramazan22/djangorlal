@@ -2,7 +2,7 @@
 from settings.base import *  # noqa
 
 DEBUG = False
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 DATABASES = {
     "default": {
