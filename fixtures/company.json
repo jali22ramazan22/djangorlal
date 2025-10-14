@@ -1,0 +1,202 @@
+[
+  {
+    "model": "db.Company",
+    "pk": 1,
+    "fields": {
+      "company_name": "Kaspi.kz",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 2,
+    "fields": {
+      "company_name": "Halyk Bank",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 3,
+    "fields": {
+      "company_name": "Air Astana",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 4,
+    "fields": {
+      "company_name": "KEGOC",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 5,
+    "fields": {
+      "company_name": "KazMunayGas",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 6,
+    "fields": {
+      "company_name": "Samruk-Kazyna",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 7,
+    "fields": {
+      "company_name": "Kazakhtelecom",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 8,
+    "fields": {
+      "company_name": "Freedom Holding Corp",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 9,
+    "fields": {
+      "company_name": "Beeline Kazakhstan",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 10,
+    "fields": {
+      "company_name": "Kcell",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 11,
+    "fields": {
+      "company_name": "Kaspi Tech",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 12,
+    "fields": {
+      "company_name": "Qazaq Air",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 13,
+    "fields": {
+      "company_name": "Astana Hub",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 14,
+    "fields": {
+      "company_name": "BI Group",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 15,
+    "fields": {
+      "company_name": "Chocofamily",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 16,
+    "fields": {
+      "company_name": "Tech Garden",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 17,
+    "fields": {
+      "company_name": "Tengizchevroil",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 18,
+    "fields": {
+      "company_name": "Kazpost",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 19,
+    "fields": {
+      "company_name": "QazTrade",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  },
+  {
+    "model": "db.Company",
+    "pk": 20,
+    "fields": {
+      "company_name": "Almaty IT Valley",
+      "created_at": "2025-10-14T00:00:00Z",
+      "updated_at": "2025-10-14T00:00:00Z",
+      "deleted_at": null
+    }
+  }
+]

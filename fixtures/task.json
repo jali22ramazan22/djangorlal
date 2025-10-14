@@ -1,0 +1,222 @@
+[
+  {"model": "db.task", "pk": 1, "fields": {
+    "title": "Set up CI/CD pipeline",
+    "category": "DevOps",
+    "project": 1,
+    "assignee": 1,
+    "deadline": "2025-10-30",
+    "completed_at": "2025-10-10",
+    "created_at": "2025-09-20",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 2, "fields": {
+    "title": "Implement API integration",
+    "category": "Backend",
+    "project": 2,
+    "assignee": 2,
+    "deadline": "2025-11-05",
+    "completed_at": "2025-10-01",
+    "created_at": "2025-09-25",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 3, "fields": {
+    "title": "Improve UI/UX design",
+    "category": "Frontend",
+    "project": 3,
+    "assignee": 3,
+    "deadline": "2025-10-25",
+    "completed_at": "2025-10-12",
+    "created_at": "2025-09-22",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 4, "fields": {
+    "title": "Write test scenarios",
+    "category": "QA",
+    "project": 4,
+    "assignee": 4,
+    "deadline": "2025-10-28",
+    "completed_at": "2025-10-15",
+    "created_at": "2025-09-18",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 5, "fields": {
+    "title": "Perform security audit",
+    "category": "Security",
+    "project": 5,
+    "assignee": 5,
+    "deadline": "2025-11-02",
+    "completed_at": "2025-10-17",
+    "created_at": "2025-09-19",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 6, "fields": {
+    "title": "Optimize database performance",
+    "category": "Database",
+    "project": 6,
+    "assignee": 6,
+    "deadline": "2025-10-29",
+    "completed_at": "2025-10-11",
+    "created_at": "2025-09-21",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 7, "fields": {
+    "title": "Refactor login system",
+    "category": "Backend",
+    "project": 7,
+    "assignee": 7,
+    "deadline": "2025-11-03",
+    "completed_at": "2025-10-14",
+    "created_at": "2025-09-23",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 8, "fields": {
+    "title": "Implement new UI design",
+    "category": "Frontend",
+    "project": 8,
+    "assignee": 8,
+    "deadline": "2025-10-31",
+    "completed_at": "2025-10-18",
+    "created_at": "2025-09-26",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 9, "fields": {
+    "title": "Improve app performance",
+    "category": "Optimization",
+    "project": 9,
+    "assignee": 9,
+    "deadline": "2025-11-07",
+    "completed_at": "2025-10-16",
+    "created_at": "2025-09-28",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 10, "fields": {
+    "title": "Create new REST API",
+    "category": "Backend",
+    "project": 10,
+    "assignee": 10,
+    "deadline": "2025-11-01",
+    "completed_at": "2025-10-19",
+    "created_at": "2025-09-27",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 11, "fields": {
+    "title": "Add AI-based module",
+    "category": "AI",
+    "project": 11,
+    "assignee": 11,
+    "deadline": "2025-11-10",
+    "completed_at": "2025-10-20",
+    "created_at": "2025-09-30",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 12, "fields": {
+    "title": "Integrate ERP system",
+    "category": "Integration",
+    "project": 12,
+    "assignee": 12,
+    "deadline": "2025-11-09",
+    "completed_at": "2025-10-21",
+    "created_at": "2025-09-29",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 13, "fields": {
+    "title": "Test startup portal",
+    "category": "QA",
+    "project": 13,
+    "assignee": 13,
+    "deadline": "2025-11-04",
+    "completed_at": "2025-10-22",
+    "created_at": "2025-09-24",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 14, "fields": {
+    "title": "Connect IoT devices",
+    "category": "IoT",
+    "project": 14,
+    "assignee": 14,
+    "deadline": "2025-11-06",
+    "completed_at": "2025-10-23",
+    "created_at": "2025-09-25",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 15, "fields": {
+    "title": "Implement loyalty program",
+    "category": "Backend",
+    "project": 15,
+    "assignee": 15,
+    "deadline": "2025-11-08",
+    "completed_at": "2025-10-24",
+    "created_at": "2025-09-26",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 16, "fields": {
+    "title": "Design innovation portal UI",
+    "category": "Frontend",
+    "project": 16,
+    "assignee": 16,
+    "deadline": "2025-11-11",
+    "completed_at": "2025-10-25",
+    "created_at": "2025-09-27",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 17, "fields": {
+    "title": "Create operations dashboard",
+    "category": "Dashboard",
+    "project": 17,
+    "assignee": 17,
+    "deadline": "2025-11-12",
+    "completed_at": "2025-10-26",
+    "created_at": "2025-09-28",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 18, "fields": {
+    "title": "Expand e-commerce system",
+    "category": "E-Commerce",
+    "project": 18,
+    "assignee": 18,
+    "deadline": "2025-11-13",
+    "completed_at": "2025-10-27",
+    "created_at": "2025-09-29",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 19, "fields": {
+    "title": "Develop export portal",
+    "category": "Web",
+    "project": 19,
+    "assignee": 19,
+    "deadline": "2025-11-14",
+    "completed_at": "2025-10-28",
+    "created_at": "2025-09-30",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }},
+  {"model": "db.task", "pk": 20, "fields": {
+    "title": "Add Smart City analytics",
+    "category": "Analytics",
+    "project": 20,
+    "assignee": 20,
+    "deadline": "2025-11-15",
+    "completed_at": "2025-10-29",
+    "created_at": "2025-09-30",
+    "updated_at": "2025-10-14",
+    "deleted_at": null
+  }}
+]
