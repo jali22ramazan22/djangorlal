@@ -34,7 +34,7 @@ PROJECT_APPS = [
     "apps.tasks.apps.TasksConfig",
     "apps.abstracts.apps.AbstractsConfig",
     "apps.auths.apps.AuthsConfig",
-    "apps.courses.apps.CoursesConfig",
+    "apps.education.apps.EducationConfig",
 ]
 INSTALLED_APPS = DJANGO_AND_THIRD_PARTY_APPS + PROJECT_APPS
 

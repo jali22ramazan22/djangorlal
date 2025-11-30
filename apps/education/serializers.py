@@ -8,7 +8,7 @@ from rest_framework.serializers import (
 )
 
 from apps.auths.serializers import UserRelatedSerializer
-from apps.courses.models import Course
+from apps.education.models import Course
 
 
 class CourseSerializer(ModelSerializer):

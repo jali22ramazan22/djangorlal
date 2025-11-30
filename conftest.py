@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 logs: list[str] = []
 
-@pytest.fixture(autouse=True, scope="session")
+@p   ytest.fixture(autouse=True, scope="session")
 def clear_logs():
     from datetime import datetime
     logs.append(f"Logs cleared at {datetime.now().microsecond}s")

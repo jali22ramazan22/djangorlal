@@ -1,5 +1,5 @@
 from django.contrib.admin import ModelAdmin, register
-from apps.courses.models import Lesson, Course
+from apps.education.models import Lesson, Course
 
 
 # Register your models here.
