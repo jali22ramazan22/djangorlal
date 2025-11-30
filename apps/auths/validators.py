@@ -29,14 +29,3 @@ def validate_email_payload_not_in_full_name(email: str, full_name: str) -> None:
             },
             code="invalid_email_full_name_relation",
         )
-
-
-def validate_phone(value: str) -> None:
-    """
-    Validate that the phone number is valid length
-    """
-    if not value.isdigit():
-        raise ValueError("The phone number contains invalid characters")
-
-    if len(value) < 10 or len(value) > 15:
-        raise ValueError("Invalid length of phone number")
