@@ -3,7 +3,7 @@ from rest_framework.serializers import (
     ModelSerializer,
     SerializerMethodField,
     IntegerField,
-    Field,
+    Field
 )
 
 # Project modules
@@ -18,9 +18,9 @@ class CurrentPKURLDefault:
 
     def __call__(self, serializer_field: Field) -> int:
         """Get the current primary key from the request."""
-        assert (
-            "pk" in serializer_field.context
-        ), "CurrentPKURLDefault requires 'pk' in the serializer context."
+        assert "pk" in serializer_field.context, (
+            "CurrentPKURLDefault requires 'pk' in the serializer context."
+        )
         return int(serializer_field.context["pk"])
 
     def __repr__(self) -> str:
@@ -37,7 +37,6 @@ class ProjectBaseSerializer(ModelSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Project
         fields = "__all__"
 
@@ -56,7 +55,6 @@ class ProjectListSerializer(ProjectBaseSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Project
         fields = (
             "id",
@@ -89,7 +87,6 @@ class ProjectCreateSerializer(ProjectBaseSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Project
         fields = (
             "id",
@@ -108,9 +105,10 @@ class ProjectUpdateSerializer(ProjectBaseSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Project
-        fields = ("name",)
+        fields = (
+            "name",
+        )
 
 
 class TaskBaseSerializer(ModelSerializer):
@@ -124,7 +122,6 @@ class TaskBaseSerializer(ModelSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Task
         fields = "__all__"
 
@@ -134,7 +131,7 @@ class TaskBaseSerializer(ModelSerializer):
 
         Parameters:
             obj: Task
-                The Task instance.
+                The Task instance. 
         Returns:
             dict
                 A dictionary containing the status id and label.
@@ -153,7 +150,6 @@ class TaskListSerializer(TaskBaseSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Task
         fields = (
             "id",
@@ -182,7 +178,6 @@ class TaskCreateSerializer(TaskBaseSerializer):
         """
         Customize the serializer's metadata.
         """
-
         model = Task
         fields = (
             "id",

@@ -52,3 +52,5 @@ class UserRepository:
 
     def all(self) -> list[User]:
         return list(self._users)
+
+

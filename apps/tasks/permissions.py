@@ -17,9 +17,7 @@ class IsUserInProject(BasePermission):
 
     message = "Forbidden! You are not a member of this project."
 
-    def has_object_permission(
-        self, request: DRFRequest, view: ViewSet, obj: Project | int
-    ) -> bool:
+    def has_object_permission(self, request: DRFRequest, view: ViewSet, obj: Project | int) -> bool:
         """
         Check if the user is part of the project.
         """
@@ -28,7 +26,10 @@ class IsUserInProject(BasePermission):
         if not isinstance(project_id, int):
             return False
 
-        return Project.objects.filter(users__id=request.user.id, id=project_id).exists()
+        return Project.objects.filter(
+            users__id=request.user.id,
+            id=project_id
+        ).exists()
 
     # def has_permission(self, request, view):
     #     return super().has_permission(request, view)

@@ -3,7 +3,6 @@ from apps.auths.tools import User, UserRepository
 from typing import Optional
 from conftest import Settings
 
-
 @pytest.fixture
 def my_fixture() -> str:
     return "Hello, Fixture!"
@@ -12,17 +11,14 @@ def my_fixture() -> str:
 def test_using_fixture(my_fixture: str) -> None:
     my_user_ids = [1, 2, 3]
     assert len(my_user_ids) == 3, "Length of my_user_ids must be 3"
-    assert (
-        my_fixture == "Hello, Fixture!"
-    ), f"{my_fixture} must be equal 'Hello, Fixture!'"
+    assert my_fixture == "Hello, Fixture!", f"{my_fixture} must be equal 'Hello, Fixture!'"
 
 
 def test_another_using_fixture(my_fixture: str) -> None:
     my_user_ids = [1, 2, 3]
     assert len(my_user_ids) == 3, "Length of my_user_ids must be 3"
-    assert (
-        my_fixture.upper() == "HELLO, FIXTURE!"
-    ), f"{my_fixture.upper()} must be equal 'HELLO, FIXTURE!'"
+    assert my_fixture.upper() == "HELLO, FIXTURE!", f"{my_fixture.upper()} must be equal 'HELLO, FIXTURE!'"
+
 
 
 @pytest.fixture
@@ -44,9 +40,7 @@ class TestUserRepository:
         assert user.id >= 1
         assert user.email != ""
 
-    def test_get_by_email_returns_none_for_unknown_email(
-        self, user_repo: UserRepository
-    ):
+    def test_get_by_email_returns_none_for_unknown_email(self, user_repo: UserRepository):
         user: Optional[User] = user_repo.get_by_email("unknown@example.com")
         assert user is None
 

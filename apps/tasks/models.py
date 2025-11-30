@@ -108,9 +108,7 @@ class Task(AbstractBaseModel):
             dict
                 A dictionary containing the status id and label.
         """
-        assert (
-            self.status in self.STATUS_CHOICES
-        ), f"Invalid status value {self.status}."
+        assert self.status in self.STATUS_CHOICES, f"Invalid status value {self.status}."
         return {
             "id": self.status,
             "label": self.STATUS_CHOICES[self.status],

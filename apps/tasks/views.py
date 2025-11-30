@@ -32,9 +32,10 @@ from apps.tasks.serializers import (
     TaskCreateSerializer,
 )
 
-
 def hello_view(
-    request: HttpRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+    request: HttpRequest,
+    *args: tuple[Any, ...],
+    **kwargs: dict[str, Any]
 ) -> HttpResponse:
     """
     Return a simple HTML page.
@@ -46,7 +47,7 @@ def hello_view(
             Additional positional arguments.
         **kwargs: dict
             Additional keyword arguments.
-
+    
     Returns:
         HttpResponse
             Rendered HTML page with a name in the context.
@@ -56,7 +57,7 @@ def hello_view(
         request=request,
         template_name="index.html",
         context={"name": "Temirbolat", "names": []},
-        status=200,
+        status=200
     )
 
 
@@ -68,8 +69,12 @@ class ProjectViewSet(ViewSet):
     # permission_classes = (IsAuthenticated,)
     serializer_class = ProjectBaseSerializer
 
+
     def list(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+        self,
+        request: DRFRequest,
+        *args: tuple[Any, ...],
+        **kwargs: dict[str, Any]
     ) -> DRFResponse:
         """
         Handle GET requests to list projects.
@@ -82,27 +87,27 @@ class ProjectViewSet(ViewSet):
                 Additional positional arguments.
             **kwargs: dict
                 Additional keyword arguments.
-
+        
         Returns:
             DRFResponse
                 A response containing list of projects.
         """
 
-        all_projects: QuerySet[Project] = (
-            Project.objects.select_related("author")
-            .annotate(users_count=Count("users", distinct=True))
-            .all()
-        )
+        all_projects: QuerySet[Project] = Project.objects.select_related("author").annotate(
+            users_count=Count("users", distinct=True)
+        ).all()
 
         serializer: ProjectListSerializer = ProjectListSerializer(
-            all_projects, many=True
+            all_projects,
+            many=True
         )
 
-        return DRFResponse(data=serializer.data, status=HTTP_200_OK)
+        return DRFResponse(
+            data=serializer.data,
+            status=HTTP_200_OK
+        )
 
-    def create(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def create(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Handle POST requests to create a new project.
 
@@ -113,23 +118,29 @@ class ProjectViewSet(ViewSet):
                 Additional positional arguments.
             **kwargs: dict
                 Additional keyword arguments.
-
+        
         Returns:
             DRFResponse
                 A response indicating the result of the creation operation.
         """
-        serializer: ProjectCreateSerializer = ProjectCreateSerializer(data=request.data)
-
+        serializer: ProjectCreateSerializer = ProjectCreateSerializer(
+            data=request.data
+        )
+        
         if not serializer.is_valid():
-            return DRFResponse(data=serializer.errors, status=HTTP_400_BAD_REQUEST)
-
+            return DRFResponse(
+                data=serializer.errors,
+                status=HTTP_400_BAD_REQUEST
+            )
+        
         serializer.save()
 
-        return DRFResponse(data=serializer.data, status=HTTP_201_CREATED)
+        return DRFResponse(
+            data=serializer.data,
+            status=HTTP_201_CREATED
+        )
 
-    def partial_update(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def partial_update(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Handle PATCH requests to partially update a project.
 
@@ -140,7 +151,7 @@ class ProjectViewSet(ViewSet):
                 Additional positional arguments.
             **kwargs: dict
                 Additional keyword arguments.
-
+        
         Returns:
             DRFResponse
                 A response indicating the result of the update operation.
@@ -149,8 +160,10 @@ class ProjectViewSet(ViewSet):
             project: Project = Project.objects.get(id=kwargs["pk"])
         except Project.DoesNotExist:
             return DRFResponse(
-                data={"pk": [f"Project with id={kwargs['pk']} does not exist."]},
-                status=HTTP_404_NOT_FOUND,
+                data={
+                    "pk": [f"Project with id={kwargs['pk']} does not exist."]
+                },
+                status=HTTP_404_NOT_FOUND
             )
 
         serializer: ProjectUpdateSerializer = ProjectUpdateSerializer(
@@ -163,11 +176,12 @@ class ProjectViewSet(ViewSet):
 
         serializer.save()
 
-        return DRFResponse(data=serializer.data, status=HTTP_200_OK)
+        return DRFResponse(
+            data=serializer.data,
+            status=HTTP_200_OK
+        )
 
-    def destroy(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def destroy(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Handle DELETE requests to delete a project.
 
@@ -178,7 +192,7 @@ class ProjectViewSet(ViewSet):
                 Additional positional arguments.
             **kwargs: dict
                 Additional keyword arguments.
-
+        
         Returns:
             DRFResponse
                 A response indicating the result of the deletion operation.
@@ -187,13 +201,17 @@ class ProjectViewSet(ViewSet):
             project: Project = Project.objects.get(id=kwargs["pk"])
         except Project.DoesNotExist:
             return DRFResponse(
-                data={"pk": [f"Project with id={kwargs['pk']} does not exist."]},
-                status=HTTP_404_NOT_FOUND,
+                data={
+                    "pk": [f"Project with id={kwargs['pk']} does not exist."]
+                },
+                status=HTTP_404_NOT_FOUND
             )
 
         project.delete()
 
-        return DRFResponse(status=HTTP_204_NO_CONTENT)
+        return DRFResponse(
+            status=HTTP_204_NO_CONTENT
+        )
 
     @action(
         methods=("GET",),
@@ -202,9 +220,7 @@ class ProjectViewSet(ViewSet):
         url_path="tasks",
         # permission_classes=(IsAuthenticated, IsUserInProject,)
     )
-    def get_tasks(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def get_tasks(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Handle GET requests to retrieve tasks for a specific project.
 
@@ -223,8 +239,10 @@ class ProjectViewSet(ViewSet):
             project: Project = Project.objects.get(id=kwargs["pk"])
         except Project.DoesNotExist:
             return DRFResponse(
-                data={"id": [f"Project with id={kwargs['pk']} does not exist."]},
-                status=HTTP_404_NOT_FOUND,
+                data={
+                    "id": [f"Project with id={kwargs['pk']} does not exist."]
+                },
+                status=HTTP_404_NOT_FOUND
             )
 
         self.check_object_permissions(request=request, obj=project)
@@ -234,7 +252,7 @@ class ProjectViewSet(ViewSet):
                 project.tasks.prefetch_related("assignees").all(),
                 many=True,
             ).data,
-            status=HTTP_200_OK,
+            status=HTTP_200_OK
         )
 
     @action(
@@ -242,14 +260,9 @@ class ProjectViewSet(ViewSet):
         detail=True,
         url_name="create_task",
         url_path="create-task",
-        permission_classes=(
-            IsAuthenticated,
-            IsUserInProject,
-        ),
+        permission_classes=(IsAuthenticated, IsUserInProject,),
     )
-    def create_task(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def create_task(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Handle POST requests to create a new task for a specific project.
 
@@ -268,18 +281,21 @@ class ProjectViewSet(ViewSet):
             project: Project = Project.objects.get(id=kwargs["pk"])
         except Project.DoesNotExist:
             return DRFResponse(
-                data={"id": [f"Project with id={kwargs['pk']} does not exist."]},
-                status=HTTP_404_NOT_FOUND,
+                data={
+                    "id": [f"Project with id={kwargs['pk']} does not exist."]
+                },
+                status=HTTP_404_NOT_FOUND
             )
 
         self.check_object_permissions(request=request, obj=project)
+
 
         serializer: TaskCreateSerializer = TaskCreateSerializer(
             data=request.data,
             context={
                 "pk": kwargs["pk"],
                 "request": request,
-            },
+            }
         )
 
         serializer.is_valid(raise_exception=True)
@@ -290,12 +306,14 @@ class ProjectViewSet(ViewSet):
             user_id=request.user.id,
         )
 
-        return DRFResponse(data=serializer.data, status=HTTP_201_CREATED)
+        return DRFResponse(
+            data=serializer.data,
+            status=HTTP_201_CREATED
+        )
 
 
 class TaskViewSet(ViewSet):
     """
     ViewSet for handling Task-related endpoints.
     """
-
     pass

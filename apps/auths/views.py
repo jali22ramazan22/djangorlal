@@ -7,22 +7,13 @@ from drf_spectacular.utils import extend_schema, OpenApiResponse
 from rest_framework.viewsets import ViewSet
 from rest_framework.request import Request as DRFRequest
 from rest_framework.response import Response as DRFResponse
-from rest_framework.status import (
-    HTTP_200_OK,
-    HTTP_400_BAD_REQUEST,
-    HTTP_405_METHOD_NOT_ALLOWED,
-)
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST, HTTP_405_METHOD_NOT_ALLOWED
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.decorators import action
 
 # Project modules
 from apps.auths.models import CustomUser
-from apps.auths.serializers import (
-    UserLoginSerializer,
-    UserLoginResponseSerializer,
-    UserLoginErrorsSerializer,
-    HTTP405MethodNotAllowedSerializer,
-)
+from apps.auths.serializers import UserLoginSerializer, UserLoginResponseSerializer, UserLoginErrorsSerializer, HTTP405MethodNotAllowedSerializer
 
 
 class CustomUserViewSet(ViewSet):
@@ -48,18 +39,21 @@ class CustomUserViewSet(ViewSet):
             HTTP_405_METHOD_NOT_ALLOWED: OpenApiResponse(
                 description="Method not allowed. You used wrong HTTP request type. Only POST can be used to reach this endpoint.",
                 response=HTTP405MethodNotAllowedSerializer,
-            ),
-        },
+            )
+        }
     )
     @action(
         methods=("POST",),
         detail=False,
         url_path="login",
         url_name="login",
-        permission_classes=(AllowAny,),
+        permission_classes=(AllowAny,)
     )
     def login(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+        self,
+        request: DRFRequest,
+        *args: tuple[Any, ...],
+        **kwargs: dict[str, Any]
     ) -> DRFResponse:
         """
         Handle user login.
@@ -94,7 +88,7 @@ class CustomUserViewSet(ViewSet):
                 "access": access_token,
                 "refresh": str(refresh_token),
             },
-            status=HTTP_200_OK,
+            status=HTTP_200_OK
         )
 
     @action(
@@ -102,11 +96,9 @@ class CustomUserViewSet(ViewSet):
         detail=False,
         url_name="personal_info",
         url_path="personal_info",
-        permission_classes=(IsAuthenticated,),
+        permission_classes=(IsAuthenticated,)
     )
-    def fetch_personal_info(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
-    ) -> DRFResponse:
+    def fetch_personal_info(self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> DRFResponse:
         """
         Fetch personal account information of the authenticated user.
 
@@ -123,7 +115,7 @@ class CustomUserViewSet(ViewSet):
                 Response containing personal account information.
         """
 
-        user: CustomUser = request.user
+        user: CustomUser = request.user 
 
         return DRFResponse(
             data={
@@ -131,5 +123,5 @@ class CustomUserViewSet(ViewSet):
                 "full_name": user.full_name,
                 "email": user.email,
             },
-            status=HTTP_200_OK,
+            status=HTTP_200_OK
         )

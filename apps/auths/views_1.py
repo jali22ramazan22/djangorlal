@@ -25,10 +25,13 @@ class CustomUserViewSet(ViewSet):
         detail=False,
         url_path="login",
         url_name="login",
-        permission_classes=(AllowAny,),
+        permission_classes=(AllowAny,)
     )
     def login(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+        self,
+        request: DRFRequest,
+        *args: tuple[Any, ...],
+        **kwargs: dict[str, Any]
     ) -> DRFResponse:
         """
         Handle user login.
@@ -64,18 +67,21 @@ class CustomUserViewSet(ViewSet):
                 "access": access_token,
                 "refresh": str(refresh),
             },
-            status=HTTP_200_OK,
+            status=HTTP_200_OK
         )
-
+        
     @action(
         methods=("GET",),
         detail=False,
         url_name="personal_account",
         url_path="personal_account",
-        permission_classes=(IsAuthenticated,),
+        permission_classes=(IsAuthenticated,)
     )
     def fetch_personal_account(
-        self, request: DRFRequest, *args: tuple[Any, ...], **kwargs: dict[str, Any]
+        self,
+        request: DRFRequest,
+        *args: tuple[Any, ...],
+        **kwargs: dict[str, Any]
     ) -> DRFResponse:
         """
         Fetch personal account details of the authenticated user.
@@ -101,5 +107,5 @@ class CustomUserViewSet(ViewSet):
                 "email": user.email,
                 "full_name": user.full_name,
             },
-            status=HTTP_200_OK,
+            status=HTTP_200_OK
         )

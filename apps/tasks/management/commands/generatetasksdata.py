@@ -69,7 +69,9 @@ class Command(BaseCommand):
         users_after: int = User.objects.count()
 
         self.stdout.write(
-            self.style.SUCCESS(f"Created {users_after - users_before} users.")
+            self.style.SUCCESS(
+                f"Created {users_after - users_before} users."
+            )
         )
 
     def __generate_projects(self, project_count: int = 100) -> None:
@@ -85,7 +87,12 @@ class Command(BaseCommand):
         for i in range(project_count):
             name: str = " ".join(choices(self.SOME_WORDS, k=4)).capitalize()
             author: User = choice(existed_users)
-            create_projects.append(Project(name=name, author=author))
+            create_projects.append(
+                Project(
+                    name=name,
+                    author=author
+                )
+            )
         Project.objects.bulk_create(create_projects, ignore_conflicts=True)
 
         project: Project
@@ -94,7 +101,9 @@ class Command(BaseCommand):
 
         projects_after: int = Project.objects.count()
         self.stdout.write(
-            self.style.SUCCESS(f"Created {projects_after - projects_before} projects.")
+            self.style.SUCCESS(
+                f"Created {projects_after - projects_before} projects."
+            )
         )
 
     def handle(self, *args: tuple[Any, ...], **kwargs: dict[str, Any]) -> None:

@@ -21,17 +21,10 @@ class TestCalculator:
             (0, 0, 0, does_not_raise()),
             (-1, 1, 0, does_not_raise()),
             (2.5, 2.5, 5.0, does_not_raise()),
-            (
-                "10",
-                5,
-                None,
-                pytest.raises(TypeError),
-            ),  # This will fail since "10" is a string
-        ],
+            ("10", 5, None, pytest.raises(TypeError)),  # This will fail since "10" is a string
+        ]
     )
-    def test_calculator_add(
-        self, x: int | float, y: int | float, res: int | float, expectation: Any
-    ) -> None:
+    def test_calculator_add(self, x: int | float, y: int | float, res: int | float, expectation: Any) -> None:
         with expectation:
             my_rest: float | int = Calculator.add(x, y)
             assert my_rest == res, f"{my_rest} must be equal {res}"
@@ -42,11 +35,9 @@ class TestCalculator:
             (4, 2, 2.0, does_not_raise()),
             (5, 2, 2.5, does_not_raise()),
             (1, 0, None, pytest.raises(ZeroDivisionError)),
-        ],
+        ]
     )
-    def test_calculator_divide(
-        self, x: int | float, y: int | float, res: float, expectation: Any
-    ) -> None:
+    def test_calculator_divide(self, x: int | float, y: int | float, res: float, expectation: Any) -> None:
         with expectation:
             my_res: float = Calculator.divide(x, y)
             assert my_res == res, f"{my_res} must be equal {res}"

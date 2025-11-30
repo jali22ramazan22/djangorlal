@@ -8,7 +8,9 @@ from rest_framework.routers import DefaultRouter
 from apps.auths.views import CustomUserViewSet
 
 
-router: DefaultRouter = DefaultRouter(trailing_slash=False)
+router: DefaultRouter = DefaultRouter(
+    trailing_slash=False
+)
 
 router.register(
     prefix="users",

@@ -1,5 +1,5 @@
 # Project modules
-from settings.base import *  # noqa
+from settings.base import *
 
 
 DEBUG = True
@@ -10,8 +10,8 @@ INTERNAL_IPS = [
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     },
 }

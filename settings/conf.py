@@ -12,18 +12,6 @@ ENV_POSSIBLE_OPTIONS = (
 ENV_ID = config("DJANGORLAR_ENV_ID", cast=str)
 SECRET_KEY = config("SECRET_KEY", cast=str)
 
-
-# -----------------------------------------------------------------
-# Django Rest Framework
-#
-REST_FRAMEWORK = {
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.AllowAny"],
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-    ),
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-}
-
 # ----------------------------------------------
 # Django REST Framework
 #

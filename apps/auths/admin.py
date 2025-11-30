@@ -19,3 +19,5 @@ class CustomUserAdmin(ModelAdmin):
     search_fields = ("email", "full_name")
     list_filter = ("is_active", "is_staff", "is_superuser")
     ordering = ("email",)
+
+

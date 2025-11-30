@@ -21,13 +21,17 @@ class ProjectAdmin(ModelAdmin):
         "author",
         "created_at",
     )
-    list_display_links = ("id",)
+    list_display_links = (
+        "id",
+    )
     list_per_page = 50
     search_fields = (
         "id",
         "name",
     )
-    ordering = ("-updated_at",)
+    ordering = (
+        "-updated_at",
+    )
     # list_editable = (
     #     "name",
     # )
@@ -46,7 +50,9 @@ class ProjectAdmin(ModelAdmin):
         "updated_at",
         "deleted_at",
     )
-    filter_horizontal = ("users",)
+    filter_horizontal = (
+        "users",
+    )
     save_on_top = True
     fieldsets = (
         (
@@ -57,7 +63,7 @@ class ProjectAdmin(ModelAdmin):
                     "author",
                     "users",
                 )
-            },
+            }
         ),
         (
             "Date and Time Information",
@@ -67,8 +73,8 @@ class ProjectAdmin(ModelAdmin):
                     "updated_at",
                     "deleted_at",
                 )
-            },
-        ),
+            }
+        )
     )
 
     # def get_readonly_fields(self, request: WSGIRequest, obj: Optional[Project] = None) -> Sequence[str]:
@@ -81,15 +87,11 @@ class ProjectAdmin(ModelAdmin):
         """Disable add permission."""
         return True
 
-    def has_delete_permission(
-        self, request: WSGIRequest, obj: Optional[Project] = None
-    ) -> bool:
+    def has_delete_permission(self, request: WSGIRequest, obj: Optional[Project] = None) -> bool:
         """Disable delete permission."""
         return False
 
-    def has_change_permission(
-        self, request: WSGIRequest, obj: Optional[Project] = None
-    ) -> bool:
+    def has_change_permission(self, request: WSGIRequest, obj: Optional[Project] = None) -> bool:
         """Disable change permission."""
         return True
 
