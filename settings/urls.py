@@ -20,6 +20,7 @@ from django.conf.urls.static import static
 # Project modules
 from apps.tasks.views import hello_view
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(route="hello/", view=hello_view, name="hello-view"),
@@ -39,6 +40,7 @@ urlpatterns = [
         SpectacularRedocView.as_view(url_name="schema"),
         name="redoc",
     ),
+    path("api/education/", include("apps.education.urls")),
 ] + debug_toolbar_urls()
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
