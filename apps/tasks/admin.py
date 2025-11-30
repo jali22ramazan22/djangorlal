@@ -15,7 +15,12 @@ class ProjectAdmin(ModelAdmin):
     Project admin configuration class.
     """
 
-    list_display = ("id", "name", "author", "created_at")
+    list_display = (
+        "id",
+        "name",
+        "author",
+        "created_at",
+    )
     list_display_links = ("id",)
     list_per_page = 50
     search_fields = (
@@ -74,7 +79,7 @@ class ProjectAdmin(ModelAdmin):
 
     def has_add_permission(self, request: WSGIRequest) -> bool:
         """Disable add permission."""
-        return False
+        return True
 
     def has_delete_permission(
         self, request: WSGIRequest, obj: Optional[Project] = None
@@ -86,7 +91,7 @@ class ProjectAdmin(ModelAdmin):
         self, request: WSGIRequest, obj: Optional[Project] = None
     ) -> bool:
         """Disable change permission."""
-        return False
+        return True
 
     # def has_module_permission(self, request: WSGIRequest) -> bool:
     #     """Disable module permission."""
