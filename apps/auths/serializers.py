@@ -2,7 +2,13 @@
 from typing import Any, Optional
 
 # Django REST Framework
-from rest_framework.serializers import Serializer, CharField, EmailField, IntegerField, ListField
+from rest_framework.serializers import (
+    Serializer,
+    CharField,
+    EmailField,
+    IntegerField,
+    ListField,
+)
 from rest_framework.exceptions import ValidationError
 
 # Project modules
@@ -65,9 +71,8 @@ class HTTP405MethodNotAllowedSerializer(Serializer):
     class Meta:
         """Customization of the Serializer metadata."""
 
-        fields = (
-            "detail",
-        )
+        fields = ("detail",)
+
 
 class UserLoginSerializer(Serializer):
     """
@@ -104,18 +109,23 @@ class UserLoginSerializer(Serializer):
 
         if not user:
             raise ValidationError(
-                detail={
-                    "email": [f"User with email '{email}' does not exist."]
-                }
+                detail={"email": [f"User with email '{email}' does not exist."]}
             )
 
         if not user.check_password(raw_password=password):
-            raise ValidationError(
-                detail={
-                    "password": ["Incorrect password."]
-                }
-            )
+            raise ValidationError(detail={"password": ["Incorrect password."]})
 
-        attrs["user"] = user    
+        attrs["user"] = user
 
         return super().validate(attrs)
+
+
+class UserRelatedSerializer(Serializer):
+    """User serializer for foreign links"""
+
+    user_id = IntegerField(read_only=True)
+    email = EmailField(read_only=True)
+    username = CharField(read_only=True)
+
+    class Meta:
+        fields = ("user_id", "email", "username")
