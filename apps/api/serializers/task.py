@@ -68,15 +68,21 @@ class TaskCreateSerializer(serializers.ModelSerializer):
         """
         Create task with project and assignees
         """
-        from django.conf import settings
+        from django.contrib.auth import get_user_model
+        from rest_framework.exceptions import ValidationError
 
-        User = settings.AUTH_USER_MODEL
+        User = get_user_model()
 
         assignee_ids = validated_data.pop("assignee_ids", [])
         project_id = validated_data.pop("project_id")
 
-        # Get project
-        project = Project.objects.get(id=project_id)
+        # Get project with validation
+        try:
+            project = Project.objects.get(id=project_id)
+        except Project.DoesNotExist:
+            raise ValidationError(
+                {"project_id": f"Project with id {project_id} does not exist"}
+            )
 
         # Create task
         task = Task.objects.create(project=project, **validated_data)
@@ -113,9 +119,9 @@ class TaskUpdateSerializer(serializers.ModelSerializer):
         """
         Update task with assignees
         """
-        from django.conf import settings
+        from django.contrib.auth import get_user_model
 
-        User = settings.AUTH_USER_MODEL
+        User = get_user_model()
 
         assignee_ids = validated_data.pop("assignee_ids", None)
 
