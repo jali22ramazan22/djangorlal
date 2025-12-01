@@ -1,141 +1,179 @@
+from datetime import date
+
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
-from apps.abstracts.models import AbstractSoftDeletableModel
-from apps.abstracts.mixins import JSONSerializerInstanceMixin
-
-from datetime import datetime
+from apps.abstracts.models import AbstractBaseModel
 
 
-class Company(AbstractSoftDeletableModel):
-    company_name = models.CharField(max_length=100)
+class Company(AbstractBaseModel):
+    """Company model"""
 
-    def __str__(self):
-        return f"{self.company_name} - instance"
-
-
-class JiraUser(User, JSONSerializerInstanceMixin):
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-    role = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"Jira User with name {self.username}"
-
-    def to_json(self) -> dict:
-        data = super().to_json()
-
-        if self.company_id:
-            data["company"] = {
-                "id": self.company_id.id,
-                "name": self.company_id.company_name,
-            }
-
-        data.pop("password", None)
-        data.pop("is_superuser", None)
-        data.pop("company_id", None)
-
-        return data
-
-
-class Project(AbstractSoftDeletableModel):
-    project_name = models.CharField(max_length=100)
-    company_id = models.ForeignKey(Company, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Project {self.project_name}"
-
-
-class Task(AbstractSoftDeletableModel, JSONSerializerInstanceMixin):
-    title = models.CharField(max_length=100)
-    category = models.CharField(max_length=100)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    assignee = models.ForeignKey(
-        JiraUser, on_delete=models.CASCADE, blank=True, null=True
+    company_name = models.CharField(
+        max_length=100, db_index=True, verbose_name="Company Name"
     )
-    deadline = models.DateField(blank=True, null=True)
-    completed_at = models.DateField(blank=True, null=True)
-    created_at = models.DateField(default=datetime.now())
+
+    class Meta:
+        verbose_name = "Company"
+        verbose_name_plural = "Companies"
+        ordering = ["-created_at"]
+        db_table = "companies"
 
     def __str__(self):
-        return f"Task {self.title}-{self.category}-{self.project}-{self.deadline}"
+        return f"{self.company_name}"
+
+    def __repr__(self):
+        return f"<Company(id={self.id}, name={self.company_name})>"
+
+
+class Project(AbstractBaseModel):
+    """Project model with author and team members"""
+
+    name = models.CharField(max_length=100, db_index=True, verbose_name="Project name")
+
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name="projects",
+        verbose_name="Company",
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="created_projects",
+        verbose_name="Author",
+    )
+
+    users = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="projects",
+        blank=True,
+        verbose_name="Team Members",
+    )
+
+    class Meta:
+        verbose_name = "Project"
+        verbose_name_plural = "Projects"
+        ordering = ["-created_at"]
+        db_table = "projects"
+
+    def __str__(self) -> str:
+        return self.name
+
+    def __repr__(self):
+        return f"<Project(id={self.id}, name={self.name})>"
+
+
+class Task(AbstractBaseModel):
+    """Task model with status tracking and assignees"""
+
+    # Status choices
+    TODO = 0
+    IN_PROGRESS = 1
+    DONE = 2
+
+    STATUS_CHOICES = [
+        (TODO, "To Do"),
+        (IN_PROGRESS, "In Progress"),
+        (DONE, "Done"),
+    ]
+
+    title = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name="Title",
+    )
+    description = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Description",
+    )
+    category = models.CharField(
+        max_length=100,
+        db_index=True,
+        verbose_name="Category",
+    )
+    status = models.IntegerField(
+        choices=STATUS_CHOICES,
+        default=TODO,
+        verbose_name="Status",
+    )
+
+    project = models.ForeignKey(
+        Project,
+        on_delete=models.CASCADE,
+        related_name="tasks",
+        verbose_name="Project",
+    )
+
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="subtasks",
+        verbose_name="Parent Task",
+    )
+
+    assignees = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        through="UserTask",
+        related_name="assigned_tasks",
+        blank=True,
+    )
+    deadline = models.DateField(
+        blank=True,
+        null=True,
+        verbose_name="Deadline",
+    )
+
+    class Meta:
+        verbose_name = "Task"
+        verbose_name_plural = "Tasks"
+        ordering = ["-created_at"]
+        db_table = "tasks"
+
+    def __str__(self):
+        return f"{self.title} - {self.project.name}"
 
     @property
-    def status(self):
-        if not self.completed_at:
-            return "open"
-        return "closed"
+    def is_completed(self) -> bool:
+        """Check if tasks is completed"""
+        return self.status == self.DONE
 
     @property
-    def overdue(self):
-        if self.deadline and not self.completed_at:
-            return self.deadline < datetime.now().date()
+    def is_overdue(self) -> bool:
+        """Check if task is overdue"""
+        if self.deadline and not self.is_completed:
+            return self.deadline < date.today()
         return False
 
-    def to_json(self):
-        data = super().to_json()
-        data["project"] = {
-            "id": self.project.id,
-            "name": self.project.project_name,
-            "company": {
-                "id": self.project.company_id.id,
-                "name": self.project.company_id.company_name,
-            },
-        }
 
-        if self.assignee:
-            data["assignee"] = {
-                "id": self.assignee.id,
-                "username": self.assignee.username,
-                "role": self.assignee.role,
-                "company": {
-                    "id": self.assignee.company_id.id,
-                    "name": self.assignee.company_id.company_name,
-                },
-            }
-        else:
-            data["assignee"] = None
+class UserTask(models.Model):
+    """
+    Intermediate model for User-Task many-to-many relationship
+    Allows tracking when user was assigned to task
+    """
 
-        data["status"] = self.status
-        data["overdue"] = self.overdue
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name="User"
+    )
 
-        return data
+    task = models.ForeignKey(Task, on_delete=models.CASCADE, verbose_name="Task")
 
+    assigned_at = models.DateTimeField(auto_now_add=True, verbose_name="Assigned At")
 
-class TaskFilter:
-    @staticmethod
-    def apply(
-        queryset,
-        *,
-        project_id=None,
-        assignee_id=None,
-        category=None,
-        overdue=None,
-        status=None,
-    ):
-        if project_id:
-            queryset = queryset.filter(project_id=project_id)
-        if assignee_id:
-            queryset = queryset.filter(assignee_id=assignee_id)
-        if category:
-            queryset = queryset.filter(category=category)
+    class Meta:
+        unique_together = ("user", "task")
+        verbose_name = "User Task Assignment"
+        verbose_name_plural = "User Task Assignments"
+        ordering = ["-assigned_at"]
+        db_table = "user_tasks"
 
-        tasks = list(queryset)
-        tasks = TaskFilter.filter_by_overdue(tasks, overdue)
-        tasks = TaskFilter.filter_by_status(tasks, status)
-        return tasks
+    def __str__(self) -> str:
+        return f"{self.user.email} -> {self.task.title}"
 
-    @staticmethod
-    def filter_by_overdue(task_list, overdue):
-        if overdue == "true":
-            return [t for t in task_list if t.overdue]
-        if overdue == "false":
-            return [t for t in task_list if not t.overdue]
-        return task_list
-
-    @staticmethod
-    def filter_by_status(task_list, status):
-        if status == "open":
-            return [t for t in task_list if t.status == "open"]
-        if status == "closed":
-            return [t for t in task_list if t.status == "closed"]
-        return task_list
+    def __repr__(self) -> str:
+        return f"<UserTask(user_id={self.user.id}, task_id={self.task.id})>"
