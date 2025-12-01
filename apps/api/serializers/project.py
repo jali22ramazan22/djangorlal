@@ -65,9 +65,9 @@ class ProjectCreateSerializer(serializers.ModelSerializer):
         Create project with company and author
         """
         from apps.db.models import Company
-        from django.conf import settings
+        from django.contrib.auth import get_user_model
 
-        User = settings.AUTH_USER_MODEL
+        User = get_user_model()
 
         company_id = validated_data.pop("company_id")
         author_id = validated_data.pop("author_id")
