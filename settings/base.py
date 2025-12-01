@@ -14,6 +14,11 @@ WSGI_APPLICATION = "settings.wsgi.application"
 ASGI_APPLICATION = "settings.asgi.application"
 
 # ----------------------------------------------
+# Custom User Model
+#
+AUTH_USER_MODEL = "auths.CustomUser"
+
+# ----------------------------------------------
 # Apps
 #
 DJANGO_AND_THIRD_PARTY_APPS = [
@@ -34,10 +39,12 @@ DJANGO_AND_THIRD_PARTY_APPS = [
 ]
 PROJECT_APPS = [
     "apps.abstracts.apps.AbstractsConfig",
+    "apps.auths.apps.AuthsConfig",  # must be before apps using the custom user
     "apps.db.apps.DbConfig",
     "apps.api.apps.ApiConfig",
 ]
 INSTALLED_APPS = DJANGO_AND_THIRD_PARTY_APPS + PROJECT_APPS
+
 
 # ----------------------------------------------
 # Middleware | Templates | Validators
