@@ -22,14 +22,20 @@ from apps.api.serializers import (
     TaskUpdateSerializer,
     TaskDetailSerializer,
 )
+from apps.api.permissions import (
+    IsTaskAssigneeOrProjectMember,
+    IsProjectAuthorOrReadOnly,
+    IsCompanyMemberOrReadOnly,
+)
 
 
 class CompanyViewSet(viewsets.ViewSet):
     """
     ViewSet for companies with explicit methods
+    Permissions: Anyone authenticated can read, only admins can modify
     """
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsCompanyMemberOrReadOnly]
 
     def list(self, request):
         """List all companies"""
@@ -59,14 +65,15 @@ class CompanyViewSet(viewsets.ViewSet):
 class ProjectViewSet(viewsets.ViewSet):
     """
     ViewSet for projects with full CRUD operations
+    Permissions: Project members can read, only author can modify
     """
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsProjectAuthorOrReadOnly]
 
     def list(self, request):
-        """List all projects"""
+        """List all projects - only projects the user is a member of"""
         queryset = (
-            Project.objects.filter(deleted_at__isnull=True)
+            Project.objects.filter(deleted_at__isnull=True, users=request.user)
             .select_related("company", "author")
             .prefetch_related("users")
         )
@@ -101,6 +108,7 @@ class ProjectViewSet(viewsets.ViewSet):
             .prefetch_related("users")
         )
         project = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, project)
         serializer = ProjectDetailSerializer(project)
         return Response(serializer.data)
 
@@ -108,6 +116,7 @@ class ProjectViewSet(viewsets.ViewSet):
         """Full update of a project"""
         queryset = Project.objects.filter(deleted_at__isnull=True)
         project = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, project)
         serializer = ProjectUpdateSerializer(project, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -118,6 +127,7 @@ class ProjectViewSet(viewsets.ViewSet):
         """Partial update of a project"""
         queryset = Project.objects.filter(deleted_at__isnull=True)
         project = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, project)
         serializer = ProjectUpdateSerializer(project, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -128,6 +138,7 @@ class ProjectViewSet(viewsets.ViewSet):
         """Soft delete a project"""
         queryset = Project.objects.filter(deleted_at__isnull=True)
         project = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, project)
         project.delete()  # Soft delete from AbstractBaseModel
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -137,6 +148,7 @@ class ProjectViewSet(viewsets.ViewSet):
         project = get_object_or_404(
             Project.objects.filter(deleted_at__isnull=True), pk=pk
         )
+        self.check_object_permissions(request, project)
         tasks = project.tasks.filter(deleted_at__isnull=True)
 
         # Apply filters from query params
@@ -169,6 +181,7 @@ class ProjectViewSet(viewsets.ViewSet):
         project = get_object_or_404(
             Project.objects.filter(deleted_at__isnull=True), pk=pk
         )
+        self.check_object_permissions(request, project)
         serializer = TaskCreateSerializer(
             data=request.data, context={"view": self, "request": request}
         )
@@ -184,14 +197,20 @@ class ProjectViewSet(viewsets.ViewSet):
 class TaskViewSet(viewsets.ViewSet):
     """
     ViewSet for tasks with full CRUD operations
+    Permissions: Only project members can view tasks, only assignees can edit
     """
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsTaskAssigneeOrProjectMember]
 
     def list(self, request):
-        """List all tasks with filtering"""
+        """List all tasks with filtering - only tasks from user's projects"""
+        # Filter tasks to only those from projects the user is a member of
+        user_projects = Project.objects.filter(
+            users=request.user, deleted_at__isnull=True
+        )
+
         queryset = (
-            Task.objects.filter(deleted_at__isnull=True)
+            Task.objects.filter(deleted_at__isnull=True, project__in=user_projects)
             .select_related("project", "project__company", "parent")
             .prefetch_related("assignees", "subtasks")
         )
@@ -241,6 +260,7 @@ class TaskViewSet(viewsets.ViewSet):
             .prefetch_related("assignees", "subtasks")
         )
         task = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, task)
         serializer = TaskDetailSerializer(task)
         return Response(serializer.data)
 
@@ -248,6 +268,7 @@ class TaskViewSet(viewsets.ViewSet):
         """Full update of a task"""
         queryset = Task.objects.filter(deleted_at__isnull=True)
         task = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, task)
         serializer = TaskUpdateSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -258,6 +279,7 @@ class TaskViewSet(viewsets.ViewSet):
         """Partial update of a task"""
         queryset = Task.objects.filter(deleted_at__isnull=True)
         task = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, task)
         serializer = TaskUpdateSerializer(task, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
@@ -268,6 +290,7 @@ class TaskViewSet(viewsets.ViewSet):
         """Soft delete a task"""
         queryset = Task.objects.filter(deleted_at__isnull=True)
         task = get_object_or_404(queryset, pk=pk)
+        self.check_object_permissions(request, task)
         task.delete()  # Soft delete from AbstractBaseModel
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -275,6 +298,7 @@ class TaskViewSet(viewsets.ViewSet):
     def update_status(self, request, pk=None):
         """Update task status"""
         task = get_object_or_404(Task.objects.filter(deleted_at__isnull=True), pk=pk)
+        self.check_object_permissions(request, task)
         new_status = request.data.get("status")
 
         valid_statuses = [choice[0] for choice in Task.STATUS_CHOICES]

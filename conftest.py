@@ -11,11 +11,21 @@ from datetime import timedelta
 
 
 @pytest.fixture
-def api_client():
+def unauthenticated_client():
     """
     Provide an unauthenticated API client
     """
     return APIClient()
+
+
+@pytest.fixture
+def api_client(regular_user):
+    """
+    Provide an authenticated API client (authenticated as regular_user)
+    """
+    client = APIClient()
+    client.force_authenticate(user=regular_user)
+    return client
 
 
 @pytest.fixture
@@ -82,13 +92,15 @@ def company(db):
 
 
 @pytest.fixture
-def project(db, company, admin_user):
+def project(db, company, admin_user, regular_user):
     """
-    Create a test project
+    Create a test project with regular_user as a member
     """
     project = Project.objects.create(
         name="Test Project", company=company, author=admin_user
     )
+    # Add users to the project so they have access
+    project.users.add(admin_user, regular_user)
     return project
 
 

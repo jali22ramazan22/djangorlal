@@ -63,8 +63,8 @@ class TestProjectEndpoints:
         assert "company" in response.data
         assert "author" in response.data
 
-    def test_update_project(self, api_client, project):
-        """Test updating a project"""
+    def test_update_project(self, admin_client, project):
+        """Test updating a project (only author can update)"""
         url = reverse("project-detail", kwargs={"pk": project.id})
         data = {
             "name": "Updated Project Name",
@@ -72,7 +72,7 @@ class TestProjectEndpoints:
             "author_id": project.author.id,
         }
 
-        response = api_client.put(url, data, format="json")
+        response = admin_client.put(url, data, format="json")
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["name"] == "Updated Project Name"
@@ -81,21 +81,21 @@ class TestProjectEndpoints:
         project.refresh_from_db()
         assert project.name == "Updated Project Name"
 
-    def test_partial_update_project(self, api_client, project):
-        """Test partial update of a project"""
+    def test_partial_update_project(self, admin_client, project):
+        """Test partial update of a project (only author can update)"""
         url = reverse("project-detail", kwargs={"pk": project.id})
         data = {"name": "Partially Updated"}
 
-        response = api_client.patch(url, data, format="json")
+        response = admin_client.patch(url, data, format="json")
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["name"] == "Partially Updated"
 
-    def test_delete_project(self, api_client, project):
-        """Test soft deleting a project"""
+    def test_delete_project(self, admin_client, project):
+        """Test soft deleting a project (only author can delete)"""
         url = reverse("project-detail", kwargs={"pk": project.id})
 
-        response = api_client.delete(url)
+        response = admin_client.delete(url)
 
         assert response.status_code == status.HTTP_204_NO_CONTENT
 

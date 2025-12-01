@@ -65,10 +65,10 @@ class TestAuthEndpoints:
         assert response.data["full_name"] == regular_user.full_name
         assert "id" in response.data
 
-    def test_personal_info_unauthenticated(self, api_client):
+    def test_personal_info_unauthenticated(self, unauthenticated_client):
         """Test retrieving personal info without authentication"""
         url = reverse("user-personal-info")
 
-        response = api_client.get(url)
+        response = unauthenticated_client.get(url)
 
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
