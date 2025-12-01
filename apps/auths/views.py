@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from drf_spectacular.utils import extend_schema
 
+
 from apps.auths.serializers import (
     UserLoginSerializer,
     UserLoginResponseSerializer,

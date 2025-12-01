@@ -3,15 +3,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from apps.api.viewsets import CompanyViewSet, ProjectViewSet, TaskViewSet
+from apps.auths.views import CustomUserViewSet
 
 # Create router with trailing_slash=False (like the origin our repo)
 router = DefaultRouter(trailing_slash=False)
 
 
-router.register(r"companies", CompanyViewSet, basename="company")
-router.register(r"projects", ProjectViewSet, basename="project")
-router.register(r"tasks", TaskViewSet, basename="task")
+router.register(r"users", CustomUserViewSet, basename="user")
 
 urlpatterns = [
     # Including all router urls
