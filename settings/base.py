@@ -14,6 +14,11 @@ WSGI_APPLICATION = "settings.wsgi.application"
 ASGI_APPLICATION = "settings.asgi.application"
 
 # ----------------------------------------------
+# Custom User Model
+#
+AUTH_USER_MODEL = "auths.CustomUser"
+
+# ----------------------------------------------
 # Apps
 #
 DJANGO_AND_THIRD_PARTY_APPS = [
@@ -23,13 +28,23 @@ DJANGO_AND_THIRD_PARTY_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # DRF
+    "rest_framework",
+    "rest_framework_simplejwt",
+    "drf_spectacular",
+    "django_filters",
+    # Dev tools
+    "debug_toolbar",
+    "django_extensions",
 ]
 PROJECT_APPS = [
     "apps.abstracts.apps.AbstractsConfig",
+    "apps.auths.apps.AuthsConfig",  # must be before apps using the custom user
     "apps.db.apps.DbConfig",
     "apps.api.apps.ApiConfig",
 ]
 INSTALLED_APPS = DJANGO_AND_THIRD_PARTY_APPS + PROJECT_APPS
+
 
 # ----------------------------------------------
 # Middleware | Templates | Validators
@@ -42,6 +57,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Debug toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 TEMPLATES = [
     {
